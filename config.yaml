@@ -1,16 +1,21 @@
 common:
   # Dataset File Paths
-  train_fn: "data/nikluge-sa-2022-train.jsonl"
-  valid_fn: "data/nikluge-sa-2022-dev.jsonl"
-  test_fn: "data/nikluge-sa-2022-test.jsonl"
+  train_data_path: "data/nikluge-sa-2022-train.jsonl"
+  eval_data_path: "data/nikluge-sa-2022-dev.jsonl"
+  test_data_path: "data/nikluge-sa-2022-test.jsonl"
+  output_dir: "trained_models"
 # Model Configurations
 models:
   roberta:
-    model: 'xlm-roberta-base'
-    max_length: 128
-    batch_size: 8
-    learning_rate: 3e-6
-    eps: 1e-8
-    num_epochs: 20
+    base_model: 'xlm-roberta-base'
     hidden_size: 768
     dropout_p: 0.1
+    batch_size: 32
+    max_length: 128
+    adam_eps: !!float 1e-8
+    warmup_ratio: 0.2
+    num_epochs: 20
+    max_grad_norm: 1.0
+    learning_rate: !!float 3e-4
+  kullm:
+    base_model: "nlpai-lab/kullm-polyglot-5.8b-v2"
