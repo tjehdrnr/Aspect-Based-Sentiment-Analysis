@@ -16,7 +16,7 @@ class RoBertaBaseClassifier(nn.Module):
         self.classifier = nn.Sequential(
             nn.Dropout(config["dropout_p"]),
             nn.Linear(config["hidden_size"], config["hidden_size"]),
-            nn.Tanh(),
+            nn.ReLU(),
             nn.Dropout(config["dropout_p"]),
             nn.Linear(config["hidden_size"], num_labels)
         )
